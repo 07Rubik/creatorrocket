@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b0a18">
+<title>CreatorRocket — Creator tools that launch ideas</title>
+<style>
+:root {
+  --site-primary: #7548ff;
+  --site-secondary: #11c9ff;
+  --site-background: #0b0a18;
+  --site-on-primary: #ffffff;
+  --site-on-secondary: #04111a;
+  --site-on-background: #f5f3ff;
+  --site-font-body: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --site-font-heading: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --site-heading-scale: 1;
+  --site-spacing-scale: 1;
+  --site-radius-scale: 1;
+  --site-decoration-opacity: 1;
+  --bg: #0b0a18;
+  --panel: #141329;
+  --panel2: #1a1834;
+  --text: #f5f3ff;
+  --muted: #a8a4c6;
+  --border: #302b55;
+  --good: #7cf7c6;
+}
+* { box-sizing: border-box; }
+body { margin: 0; font-family: var(--site-font-body); background: var(--site-background); color: var(--site-on-background); }
+button, input, textarea, select { font: inherit; }
+button { cursor: pointer; }
+#app { min-height: 100vh; width: 100%; border-radius: 0; background: var(--site-background); color: var(--site-on-background); overflow: hidden; }
+a { color: inherit; text-decoration: none; }
+.shell { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
+.topbar { display:flex; align-items:center; justify-content:space-between; padding:22px 0; gap:16px; }
+.brand { display:flex; align-items:center; gap:11px; font-weight:850; letter-spacing:-.04em; font-size:1.16rem; }
+.logo { width:36px;height:36px; display:grid;place-items:center;border-radius:12px;background:linear-gradient(135deg,var(--site-primary),var(--site-secondary));color:#fff;box-shadow:0 0 28px #7548ff44; }
+.logo svg { width:22px;height:22px; }
+.nav { display:flex;align-items:center;gap:20px;color:var(--muted);font-size:.9rem; }
+.nav a:hover { color:white; }
+.pill { border:1px solid var(--border); padding:9px 13px; border-radius:999px; color:#ddd8ff; font-size:.82rem; }
+.hero { position:relative; padding:65px 0 48px; text-align:center; }
+.glow { position:absolute; width:420px;height:300px;top:15px;left:50%;transform:translateX(-50%);background:radial-gradient(ellipse,#7248ff2e 0%,#10c8ff0d 42%,transparent 72%);pointer-events:none;opacity:var(--site-decoration-opacity); }
+.eyebrow { display:inline-flex;align-items:center;gap:8px;border:1px solid #393064;background:#17132e;padding:7px 12px;border-radius:999px;color:#c6baff;font-size:.8rem;position:relative; }
+.dot { width:7px;height:7px;border-radius:50%;background:var(--site-secondary);box-shadow:0 0 12px var(--site-secondary); }
+h1,h2,h3,p { margin-top:0; }
+h1 { font-family:var(--site-font-heading);font-size:clamp(2.7rem,7vw,5.4rem);line-height:.99;letter-spacing:-.075em;max-width:850px;margin:24px auto 18px;position:relative; }
+.gradient { background:linear-gradient(100deg,#b9a5ff 10%,#7e72ff 48%,#36d8ff 95%);-webkit-background-clip:text;background-clip:text;color:transparent; }
+.hero p { max-width:630px;margin:0 auto;color:var(--muted);font-size:1.08rem;line-height:1.7; }
+.hero-actions { display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:26px; }
+.btn { display:inline-flex;align-items:center;justify-content:center;gap:9px;border:1px solid transparent;border-radius:13px;padding:12px 17px;font-weight:750;transition:transform .15s,filter .15s; }
+.btn:hover { transform:translateY(-1px);filter:brightness(1.08); }
+.btn-primary { background:linear-gradient(105deg,var(--site-primary),#5e7cff);color:white;box-shadow:0 8px 28px #7548ff35; }
+.btn-quiet { background:#17152d;border-color:var(--border);color:#e9e6ff; }
+.mini-proof { display:flex;justify-content:center;gap:18px;flex-wrap:wrap;color:#8e89ad;font-size:.78rem;margin-top:22px; }
+.mini-proof span::before { content:"✓";color:var(--good);margin-right:7px; }
+.section-head { display:flex;align-items:end;justify-content:space-between;gap:20px;margin:20px 0 18px; }
+.section-head h2 { font-size:1.55rem;letter-spacing:-.04em;margin-bottom:5px; }
+.section-head p { color:var(--muted);margin:0;font-size:.92rem; }
+.search-wrap { position:relative;width:min(290px,100%); }
+.search-wrap input { width:100%;border:1px solid var(--border);background:#111024;color:var(--text);border-radius:12px;padding:11px 13px 11px 38px;outline:none; }
+.search-wrap input:focus,.field:focus { border-color:var(--site-secondary);box-shadow:0 0 0 3px #11c9ff19; }
+.search-icon { position:absolute;left:13px;top:11px;color:#8580a6; }
+.tools-grid { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px; }
+.tool-card { background:linear-gradient(145deg,#17152e,#111024);border:1px solid var(--border);border-radius:18px;padding:19px;min-height:175px;display:flex;flex-direction:column;align-items:flex-start;transition:transform .18s,border-color .18s; }
+.tool-card:hover { transform:translateY(-3px);border-color:#6252ad; }
+.tool-icon { width:42px;height:42px;display:grid;place-items:center;border-radius:13px;background:#2b2156;color:#bcb0ff;margin-bottom:17px; }
+.tool-icon svg { width:21px;height:21px; }
+.tool-card h3 { font-size:1rem;margin-bottom:7px;letter-spacing:-.02em; }
+.tool-card p { color:var(--muted);font-size:.86rem;line-height:1.5;margin-bottom:16px; }
+.tool-card .launch { margin-top:auto;color:#7edfff;font-size:.85rem;font-weight:750; }
+.workspace { display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:16px;margin:38px 0 70px; }
+.panel { background:var(--panel);border:1px solid var(--border);border-radius:20px;padding:22px;min-width:0; }
+.panel-top { display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px; }
+.panel h2 { font-size:1.25rem;letter-spacing:-.035em;margin:0; }
+.tag { font-size:.72rem;color:#b8adff;background:#29204f;border:1px solid #403475;border-radius:999px;padding:5px 9px;white-space:nowrap; }
+label { display:block;font-size:.83rem;color:#d6d1f3;font-weight:650;margin:14px 0 7px; }
+.field { width:100%;border:1px solid #363157;background:#0e0d20;color:#f5f3ff;border-radius:11px;padding:12px;outline:none; }
+textarea.field { min-height:105px;resize:vertical;line-height:1.55; }
+select.field { cursor:pointer; }
+.form-row { display:grid;grid-template-columns:1fr 1fr;gap:12px; }
+.full { width:100%;margin-top:16px; }
+.output { min-height:260px;background:#0e0d20;border:1px dashed #423b6a;border-radius:14px;padding:16px;color:#e9e6ff;line-height:1.7;white-space:pre-wrap;overflow-wrap:anywhere; }
+.output.empty { color:#777293;display:flex;align-items:center;justify-content:center;text-align:center; }
+.output-tools { display:flex;gap:8px;margin-top:12px; }
+.output-tools .btn { flex:1;padding:10px;font-size:.86rem; }
+.note { color:#8984a8;font-size:.77rem;line-height:1.55;margin-top:12px; }
+footer { border-top:1px solid #24213e;padding:24px 0 34px;color:#8c87aa;font-size:.8rem; }
+.footer-inner { display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap; }
+.toast { position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:#d8fff0;color:#09281e;padding:11px 15px;border-radius:12px;font-size:.9rem;font-weight:750;box-shadow:0 8px 30px #0005;display:none;z-index:10; }
+@media(max-width:780px) {
+ .nav { gap:10px; } .nav .hide-mobile { display:none; }
+ .hero { padding:48px 0 36px; }
+ .tools-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+ .workspace { grid-template-columns:1fr;margin-top:28px; }
+ .section-head { align-items:flex-start;flex-direction:column; }
+ .search-wrap { width:100%; }
+}
+@media(max-width:480px) {
+ .shell { width:min(100% - 28px,1120px); }
+ .tools-grid { grid-template-columns:1fr; }
+ .tool-card { min-height:unset; }
+ .hero p { font-size:.98rem; }
+ .form-row { grid-template-columns:1fr;gap:0; }
+ .panel { padding:16px; }
+ .topbar { padding:16px 0; }
+ .brand { font-size:1rem; }
+}
+@media (prefers-color-scheme: light) {
+ /* Keep the creator-brand dark canvas consistent in either host mode. */
+}
+</style>
+</head>
+<body>
+<div id="app">
+  <header class="shell topbar">
+    <a class="brand" href="#" aria-label="CreatorRocket home">
+      <span class="logo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M14.3 3.2c2.7-.9 5.4-.7 6.5-.5.2 1.2.4 3.8-.5 6.5-1.4 4.2-5.4 7.3-9.8 8.4l-4.6-4.6c1.1-4.4 4.2-8.4 8.4-9.8Z" stroke="white" stroke-width="1.7"/><circle cx="15.6" cy="8.1" r="2" stroke="white" stroke-width="1.7"/><path d="m6.4 12.8-3.2.8 2.4 2.4M11.2 17.6l-.8 3.2-2.4-2.4" stroke="white" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      CreatorRocket
+    </a>
+    <nav class="nav" aria-label="Main navigation">
+      <a href="#tools">Free tools</a>
+      <a class="hide-mobile" href="#workspace">Try the generator</a>
+      <a class="pill" href="#tools">Launch free ↗</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="shell hero">
+      <div class="glow"></div>
+      <div class="eyebrow"><span class="dot"></span> YOUR CREATOR SIDEKICK</div>
+      <h1>Make your next post<br><span class="gradient">impossible to ignore.</span></h1>
+      <p>Free creator tools to brainstorm video ideas, write stronger hooks, shape captions and plan your next post. Less staring at a blank screen. More making stuff.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#workspace">Create something <span aria-hidden="true">↗</span></a>
+        <a class="btn btn-quiet" href="#tools">Explore free tools ↓</a>
+      </div>
+      <div class="mini-proof"><span>Free to try</span><span>No account needed</span><span>Made for creators</span></div>
+    </section>
+
+    <section class="shell" id="tools">
+      <div class="section-head">
+        <div><h2>Your creator toolkit</h2><p>Pick a tool and get your next idea moving.</p></div>
+        <div class="search-wrap"><span class="search-icon">⌕</span><input id="toolSearch" type="search" placeholder="Find a tool..." aria-label="Search tools"></div>
+      </div>
+      <div class="tools-grid" id="toolsGrid">
+        <button class="tool-card" data-tool="ideas" data-search="video ideas brainstorm content niche"><span class="tool-icon">✦</span><h3>Video Idea Generator</h3><p>Find fresh concepts for your niche and audience.</p><span class="launch">Open tool ↗</span></button>
+        <button class="tool-card" data-tool="hooks" data-search="hooks opening lines attention grabber"><span class="tool-icon">⚡</span><h3>Hook Writer</h3><p>Draft punchy opening lines for your next video.</p><span class="launch">Open tool ↗</span></button>
+        <button class="tool-card" data-tool="captions" data-search="caption description social copy"><span class="tool-icon">✎</span><h3>Caption Maker</h3><p>Turn a topic into captions in different tones.</p><span class="launch">Open tool ↗</span></button>
+        <button class="tool-card" data-tool="scripts" data-search="script outline short video voiceover"><span class="tool-icon">▤</span><h3>Short Script Planner</h3><p>Build a simple beginning, middle and ending.</p><span class="launch">Open tool ↗</span></button>
+        <button class="tool-card" data-tool="bio" data-search="profile bio username description"><span class="tool-icon">◎</span><h3>Bio Brainstormer</h3><p>Write a clearer profile bio that sounds like you.</p><span class="launch">Open tool ↗</span></button>
+        <button class="tool-card" data-tool="hashtags" data-search="hashtags keywords topic tags"><span class="tool-icon">#</span><h3>Keyword & Tag Ideas</h3><p>Generate relevant topic words to research.</p><span class="launch">Open tool ↗</span></button>
+      </div>
+    </section>
+
+    <section class="shell workspace" id="workspace">
+      <div class="panel">
+        <div class="panel-top"><h2 id="generatorTitle">Video Idea Generator</h2><span class="tag">FREE TOOL</span></div>
+        <p style="color:var(--muted);font-size:.9rem;line-height:1.6;margin-bottom:8px">Tell CreatorRocket what you make. This starter version runs right in your browser, with no account or API key needed.</p>
+        <label for="toolType">Choose a tool</label>
+        <select class="field" id="toolType">
+          <option value="ideas">Video Idea Generator</option>
+          <option value="hooks">Hook Writer</option>
+          <option value="captions">Caption Maker</option>
+          <option value="scripts">Short Script Planner</option>
+          <option value="bio">Bio Brainstormer</option>
+          <option value="hashtags">Keyword & Tag Ideas</option>
+        </select>
+        <div class="form-row">
+          <div><label for="niche">Your niche</label><input class="field" id="niche" maxlength="90" placeholder="e.g. gaming, music, books"></div>
+          <div><label for="tone">Your vibe</label><select class="field" id="tone"><option value="funny">Funny & playful</option><option value="helpful">Helpful & clear</option><option value="bold">Bold & confident</option><option value="chill">Chill & relatable</option></select></div>
+        </div>
+        <label for="topic">Topic or video idea (optional)</label>
+        <textarea class="field" id="topic" maxlength="400" placeholder="e.g. trying a difficult game level for the first time"></textarea>
+        <button class="btn btn-primary full" id="generateBtn">Generate ideas ✦</button>
+        <p class="note">This is a local prototype using built-in templates, not a live AI service. Outputs are starting points, so personalise them and check facts before posting.</p>
+      </div>
+      <div class="panel">
+        <div class="panel-top"><h2>Your results</h2><span class="tag">READY TO COPY</span></div>
+        <div class="output empty" id="output" aria-live="polite">Your next idea starts here. Choose a tool, enter a niche, then hit Generate.</div>
+        <div class="output-tools"><button class="btn btn-quiet" id="copyBtn">Copy result</button><button class="btn btn-quiet" id="clearBtn">Clear</button></div>
+        <p class="note">CreatorRocket doesn't connect to TikTok or promise views. These are brainstorming tools to help you create original content.</p>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="shell footer-inner"><span>© <span id="year"></span> CreatorRocket · Creator tools for the next big idea.</span><span>Independent concept · Not affiliated with TikTok.</span></div>
+  </footer>
+</div>
+<div class="toast" id="toast" role="status"></div>
+<script>
+const labels = {
+  ideas: "Video Idea Generator",
+  hooks: "Hook Writer",
+  captions: "Caption Maker",
+  scripts: "Short Script Planner",
+  bio: "Bio Brainstormer",
+  hashtags: "Keyword & Tag Ideas"
+};
+const el = id => document.getElementById(id);
+let latest = "";
+el("year").textContent = new Date().getFullYear();
+
+function chooseTool(key) {
+  el("toolType").value = key;
+  el("generatorTitle").textContent = labels[key] || labels.ideas;
+  el("generateBtn").textContent = "Generate " + (key === "ideas" ? "ideas" : key === "hooks" ? "hooks" : key === "captions" ? "captions" : key === "scripts" ? "a script" : key === "bio" ? "bio options" : "keyword ideas") + " ✦";
+  el("workspace").scrollIntoView({behavior:"smooth", block:"start"});
+}
+document.querySelectorAll(".tool-card").forEach(card => card.addEventListener("click", () => chooseTool(card.dataset.tool)));
+el("toolType").addEventListener("change", () => {
+  el("generatorTitle").textContent = labels[el("toolType").value];
+  chooseTool(el("toolType").value);
+});
+el("toolSearch").addEventListener("input", () => {
+  const q = el("toolSearch").value.toLowerCase().trim();
+  document.querySelectorAll(".tool-card").forEach(card => {
+    card.style.display = card.dataset.search.includes(q) || card.textContent.toLowerCase().includes(q) ? "" : "none";
+  });
+});
+
+function makeOutput() {
+  const type = el("toolType").value;
+  const niche = el("niche").value.trim() || "your niche";
+  const topic = el("topic").value.trim() || "a topic your audience cares about";
+  const tone = el("tone").value;
+  const openers = tone === "funny"
+    ? ["I thought this would be easy. I was spectacularly wrong.","POV: you said 'one quick try' and now it's three hours later.","Nobody warned me this part would be the hardest."]
+    : tone === "helpful"
+    ? ["Here are three things I wish I'd known about "+topic+".","Let's break "+topic+" down into three simple steps.","If you're new to "+topic+", start here."]
+    : tone === "bold"
+    ? ["Stop scrolling if you want to get better at "+topic+".","Here's the move that changed how I approach "+topic+".","Most people skip this part of "+topic+". Don't."]
+    : ["A little reminder if you're figuring out "+topic+".","Come spend a minute with me while I try "+topic+".","This is your sign to give "+topic+" a go."];
+  const ideas = [
+    "A beginner's test: try "+topic+" with one simple rule.",
+    "Three things people misunderstand about "+topic+".",
+    "Expectation vs reality: "+topic+" edition.",
+    "I tried "+topic+" so you can see what actually happens.",
+    "A tiny tip that makes "+topic+" easier to understand.",
+    "The most surprising part of "+topic+" was this."
+  ];
+  const captions = [
+    "Be honest: have you tried this? 👀 #"+slug(niche)+" #creator",
+    "Saving this for the next time I try "+topic+". ✨",
+    "Part of the journey is figuring it out as you go. What should I try next?"
+  ];
+  const bio = [
+    niche+" creator ✦ sharing the process, not just the highlights",
+    "Making "+niche+" content | New videos, fresh ideas & honest attempts",
+    "Your corner of the internet for "+niche+". Follow along for the next one."
+  ];
+  const tags = ["#"+slug(niche), "#"+slug(topic.split(" ")[0]), "#creatorcommunity", "#learnontiktok", "#behindthescenes"];
+  let result = "";
+  if (type === "ideas") {
+    result = "VIDEO IDEAS FOR: "+niche.toUpperCase()+"\n\n"+ideas.map((x,i)=>(i+1)+". "+x).join("\n")+"\n\nTIP: Pick one idea and make the first two seconds show the question, result or problem.";
+  } else if (type === "hooks") {
+    result = "OPENING HOOKS\n\n"+openers.map((x,i)=>(i+1)+". "+x).join("\n")+"\n\nTry saying the hook out loud, then cut any words that don't earn their place.";
+  } else if (type === "captions") {
+    result = "CAPTION OPTIONS\n\n"+captions.map((x,i)=>(i+1)+". "+x).join("\n")+"\n\nAdd details that are true to your video. Avoid unrelated tags just for reach.";
+  } else if (type === "scripts") {
+    result = "SHORT VIDEO OUTLINE\n\n1. HOOK (0–2 sec): "+openers[0]+"\n\n2. SETUP (2–6 sec): Explain what you're trying and why it matters.\n\n3. MAIN MOMENT (6–20 sec): Show the attempt, tip, reveal or reaction.\n\n4. PAYOFF: Share what happened or what you learned.\n\n5. INVITE: Ask a genuine question related to "+topic+".\n\nTopic: "+topic+"\nNiche: "+niche;
+  } else if (type === "bio") {
+    result = "BIO OPTIONS\n\n"+bio.map((x,i)=>(i+1)+". "+x).join("\n")+"\n\nMake sure your final bio accurately reflects you and your content.";
+  } else {
+    result = "KEYWORD & TAG STARTERS\n\n"+tags.join("   ")+"\n\nRELATED PHRASES TO RESEARCH\n• "+niche+" tips\n• "+topic+" beginner guide\n• "+niche+" behind the scenes\n• how to improve at "+topic+"\n\nThese are brainstorming suggestions, not live trend data. Check which terms fit your actual video.";
+  }
+  latest = result;
+  el("output").classList.remove("empty");
+  el("output").textContent = result;
+}
+function slug(s) {
+  return s.toLowerCase().replace(/[^a-z0-9]+/g,"").slice(0,22) || "creator";
+}
+el("generateBtn").addEventListener("click", makeOutput);
+el("copyBtn").addEventListener("click", async () => {
+  if (!latest) { toast("Generate a result first."); return; }
+  try {
+    await navigator.clipboard.writeText(latest);
+    toast("Copied to clipboard!");
+  } catch (e) {
+    const range = document.createRange();
+    range.selectNodeContents(el("output"));
+    const selection = window.getSelection();
+    selection.removeAllRanges();
+    selection.addRange(range);
+    toast("Text selected. Press Ctrl+C to copy.");
+  }
+});
+el("clearBtn").addEventListener("click", () => {
+  latest = "";
+  el("output").textContent = "Your next idea starts here. Choose a tool, enter a niche, then hit Generate.";
+  el("output").classList.add("empty");
+});
+function toast(message) {
+  const t = el("toast");
+  t.textContent = message;
+  t.style.display = "block";
+  clearTimeout(window.__crToast);
+  window.__crToast = setTimeout(() => t.style.display = "none", 1900);
+}
+</script>
+</body>
+</html>
