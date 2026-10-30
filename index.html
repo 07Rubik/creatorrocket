@@ -1,214 +1,514 @@
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#0b0a14">
-<meta name="description" content="CreatorRocket — your creator workspace.">
-<title>CreatorRocket — Creator workspace</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CreatorRocket | Creator Studio</title>
 <style>
-:root{color-scheme:dark;--bg:#0b0a14;--panel:#151426;--panel2:#1c1930;--line:#332d4c;--text:#f7f4ff;--muted:#aaa3c1;--purple:#9275ff;--cyan:#64e3ef;--green:#7be5b6}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 70% -10%,#28204a,transparent 38%),var(--bg);color:var(--text);font:15px/1.5 Inter,system-ui,sans-serif}button,input,textarea,select{font:inherit}button,a{cursor:pointer}a{color:inherit;text-decoration:none}button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
-.layout{min-height:100vh;display:grid;grid-template-columns:230px 1fr}.side{height:100vh;position:sticky;top:0;border-right:1px solid var(--line);padding:24px 15px;display:flex;flex-direction:column;gap:26px;background:#0d0c17}.brand{display:flex;align-items:center;gap:10px;font-weight:850;font-size:1.1rem;letter-spacing:-.04em;padding:0 8px}.logo{width:35px;height:35px;border-radius:12px;background:linear-gradient(135deg,#9871ff,#53deed);color:#100d20;display:grid;place-items:center;font-size:20px}.label{color:#817a9b;text-transform:uppercase;letter-spacing:.12em;font-size:.68rem;padding:0 10px;margin:0 0 8px}.nav{display:grid;gap:5px}.nav button{border:1px solid transparent;background:transparent;color:var(--muted);text-align:left;padding:11px;border-radius:11px}.nav button.active,.nav button:hover{background:#211c39;color:white;border-color:#3c315f}.nav button span{display:inline-block;width:28px;color:var(--cyan)}.side-bottom{margin-top:auto;border:1px solid #44366c;border-radius:14px;padding:14px;background:#1b1630}.side-bottom p{font-size:.78rem;color:var(--muted);margin:5px 0 12px}
-.main{padding:27px clamp(16px,4vw,48px) 60px;max-width:1450px;width:100%;margin:auto;min-width:0}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px;gap:12px}.muted{color:var(--muted)}.btn{border:1px solid var(--line);background:#1a1829;color:var(--text);padding:10px 14px;border-radius:10px;font-weight:700;font-size:.83rem}.btn.primary{background:linear-gradient(110deg,#8b69ff,#6f83ff);border:0}.btn:hover{border-color:#8570c8}.btn:disabled{opacity:.6;cursor:wait}.page{display:none}.page.active{display:block}.intro{display:flex;justify-content:space-between;align-items:end;gap:16px;margin-bottom:23px}.eyebrow{font-size:.72rem;letter-spacing:.13em;text-transform:uppercase;color:var(--cyan);font-weight:800}.intro h1{font-size:clamp(1.8rem,3vw,2.6rem);letter-spacing:-.06em;line-height:1.1;margin:8px 0}.intro p{color:var(--muted);margin:0;max-width:680px}.grid{display:grid;gap:14px}.stats{grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:15px}.card{min-width:0;border:1px solid var(--line);border-radius:17px;padding:18px;background:linear-gradient(145deg,#171526,#11101d)}.statname{color:var(--muted);font-size:.8rem}.stat{font-size:1.85rem;font-weight:850;letter-spacing:-.06em;margin:12px 0 0}.split{grid-template-columns:1.3fr .9fr;margin-bottom:15px}.cardhead{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:15px}.cardhead h2{font-size:1rem;margin:0}.cardhead p{color:var(--muted);font-size:.78rem;margin:4px 0 0}.week{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;margin-top:18px}.day{text-align:center;border:1px solid var(--line);border-radius:10px;padding:8px 2px;font-size:.72rem;color:var(--muted)}.day strong{display:block;color:white;margin:5px 0}.day.active{border-color:#7963d4;background:#211b39}.bar{height:7px;background:#2b2740;border-radius:20px;overflow:hidden}.bar span{display:block;height:100%;background:linear-gradient(90deg,var(--purple),var(--cyan))}.quick{display:grid;gap:9px}.quick button{background:#11101d;border:1px solid var(--line);border-radius:12px;color:white;text-align:left;padding:13px}.quick button:hover{border-color:#7560b9}.quick small{display:block;color:var(--muted);margin-top:3px}.toolgrid{grid-template-columns:repeat(3,minmax(0,1fr))}.tool{border:1px solid var(--line);border-radius:14px;background:#151426;padding:16px;text-align:left;color:white}.tool:hover{border-color:#7963d4;transform:translateY(-1px)}.tool b{display:block;margin:9px 0 5px}.tool small{color:var(--muted)}.formgrid{grid-template-columns:1fr 1fr}.field{display:block;width:100%;border:1px solid var(--line);border-radius:10px;background:#0e0d19;color:white;padding:11px;margin-top:6px}.fieldlabel{display:block;color:#d7d0ee;font-size:.82rem;margin:13px 0}.output{white-space:pre-wrap;overflow-wrap:anywhere;min-height:250px;background:#0e0d19;border:1px dashed #484064;border-radius:12px;padding:14px;color:#e9e4ff}.saved{border:1px solid var(--line);border-radius:12px;padding:13px;margin:9px 0;background:#11101d}.saved p{white-space:pre-wrap;overflow-wrap:anywhere}.pricing{grid-template-columns:repeat(3,minmax(0,1fr))}.price{font-size:2.2rem;font-weight:850;margin:12px 0}.pricing li{margin:9px 0;color:#d4cee9}.note{color:var(--muted);font-size:.78rem;line-height:1.6}.pill{font-size:.7rem;color:var(--cyan);border:1px solid #4c416d;border-radius:999px;padding:4px 8px}.toast{display:none;position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#d8fff0;color:#09281e;padding:11px 15px;border-radius:11px;z-index:9;font-weight:700;max-width:90vw}.mobilebrand{display:none}
-@media(max-width:1000px){.stats{grid-template-columns:repeat(2,1fr)}.split{grid-template-columns:1fr}.toolgrid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:700px){.layout{display:block}.side{height:auto;position:fixed;bottom:0;top:auto;left:0;right:0;z-index:5;padding:7px;background:#100f1df5;border:0;border-top:1px solid var(--line)}.side>.brand,.side>.side-bottom,.side>.navtitle{display:none}.nav{display:flex;justify-content:space-around}.nav button{flex:1;text-align:center;padding:7px 2px;font-size:.66rem}.nav button span{display:block;width:auto;font-size:1rem}.main{padding:17px 13px 100px}.mobilebrand{display:flex;align-items:center;gap:8px;font-weight:800}.top{margin-bottom:23px}.intro{align-items:start;flex-direction:column}.toolgrid,.pricing,.formgrid{grid-template-columns:1fr}.card{padding:15px}.week{gap:3px}.day{font-size:.62rem}.top .btn{padding:8px}.stats{gap:9px}}
-@media(max-width:400px){.stat{font-size:1.5rem}}
+:root {
+  --bg:#090812;
+  --panel:#131020;
+  --panel2:#19152a;
+  --border:#29223e;
+  --purple:#925cff;
+  --blue:#27c9ff;
+  --text:#f5f2ff;
+  --muted:#9992ad;
+  --green:#51dda2;
+  --yellow:#ffcb69;
+  --red:#ff718b;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,Arial,sans-serif}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+.app{display:flex;min-height:100vh}
+.sidebar{width:245px;background:#0e0b19;border-right:1px solid var(--border);padding:25px 16px;position:fixed;inset:0 auto 0 0;z-index:5;display:flex;flex-direction:column}
+.logo{font-size:23px;font-weight:900;letter-spacing:-1px;padding:5px 12px 32px}
+.logo span{color:var(--blue)}
+.logo small{display:block;font-size:10px;letter-spacing:3px;color:var(--muted);margin-top:5px}
+.nav-label{font-size:10px;color:#716a86;letter-spacing:2px;padding:12px}
+.nav button{display:flex;align-items:center;gap:12px;width:100%;padding:12px;border:0;background:transparent;color:var(--muted);border-radius:10px;text-align:left;margin:3px 0;font-size:14px}
+.nav button:hover,.nav button.active{background:#211a36;color:white}
+.nav button.active{box-shadow:inset 3px 0 var(--blue)}
+.nav-icon{width:22px;text-align:center}
+.sidebar-bottom{margin-top:auto;padding:12px}
+.pro-card{background:linear-gradient(135deg,#34205c,#142d48);padding:16px;border:1px solid #514078;border-radius:13px}
+.pro-card strong{font-size:14px}
+.pro-card p{font-size:12px;color:#c0b7d8;line-height:1.5}
+.pro-card button{width:100%;background:var(--blue);color:#07111b;border:0;padding:10px;border-radius:8px;font-weight:800}
+main{margin-left:245px;width:calc(100% - 245px);padding:30px 38px 60px;max-width:1600px}
+.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:30px}
+.topbar p{color:var(--muted);font-size:13px;margin:5px 0}
+.avatar{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,var(--purple),var(--blue));display:grid;place-items:center;font-weight:900}
+.page{display:none}
+.page.active{display:block}
+h1{font-size:30px;letter-spacing:-1px;margin:0 0 8px}
+h2{font-size:19px;margin:0 0 16px}
+h3{font-size:15px;margin:0 0 8px}
+.subtitle{color:var(--muted);margin:0 0 25px;font-size:14px}
+.header-row{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:24px}
+.header-row p{color:var(--muted);font-size:13px;margin:5px 0}
+.btn{border:0;border-radius:9px;padding:11px 16px;font-weight:750}
+.primary{background:linear-gradient(110deg,var(--purple),#648dff);color:white}
+.secondary{background:var(--panel2);border:1px solid var(--border);color:var(--text)}
+.danger{background:#3a1725;color:#ff9caf;border:1px solid #613047}
+.grid{display:grid;gap:17px}
+.stats{grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:22px}
+.panel,.stat,.tool-card,.post-card,.day{background:var(--panel);border:1px solid var(--border);border-radius:14px}
+.stat{padding:19px}
+.stat-label{font-size:12px;color:var(--muted)}
+.stat-value{font-size:29px;font-weight:850;margin:12px 0 5px}
+.stat-note{font-size:11px;color:var(--green)}
+.two-col{grid-template-columns:1.4fr 1fr}
+.panel{padding:21px;margin-bottom:18px}
+.panel-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.panel-head span{font-size:12px;color:var(--muted)}
+.progress-track{height:9px;background:#28223a;border-radius:20px;overflow:hidden;margin:15px 0}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--purple),var(--blue));border-radius:20px;width:0}
+.quick-grid{grid-template-columns:repeat(2,1fr)}
+.quick{background:var(--panel2);border:1px solid var(--border);border-radius:11px;padding:15px;text-align:left;color:white}
+.quick:hover,.tool-card:hover{border-color:var(--purple)}
+.quick span{display:block;font-size:21px;margin-bottom:8px}
+.quick small{color:var(--muted)}
+.list-row{display:flex;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid var(--border);font-size:13px}
+.list-row:last-child{border:0}
+.muted{color:var(--muted)}
+.badge{display:inline-block;border-radius:30px;padding:5px 9px;font-size:10px;background:#29213f;color:#c7b3ff}
+.badge.planned{background:#302047;color:#cbaaff}
+.badge.progress{background:#44351c;color:var(--yellow)}
+.badge.published{background:#123b31;color:var(--green)}
+.tools-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+.tool-card{padding:19px;cursor:pointer;transition:.2s}
+.tool-card .emoji{font-size:26px;margin-bottom:15px}
+.tool-card p{font-size:12px;color:var(--muted);line-height:1.5;min-height:38px}
+.tool-card button{margin-top:10px}
+.calendar-toolbar{display:flex;justify-content:space-between;align-items:center;margin:20px 0}
+.calendar-toolbar h2{margin:0}
+.calendar-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:7px}
+.weekday{text-align:center;color:var(--muted);font-size:11px;padding:10px 0}
+.day{min-height:115px;padding:9px;overflow:hidden}
+.day.today{border-color:var(--blue);box-shadow:inset 0 0 0 1px var(--blue)}
+.day.empty{background:transparent;border-color:transparent}
+.day-number{font-size:12px;color:#d8d2e7;margin-bottom:9px}
+.day-post{display:block;width:100%;text-align:left;border:0;border-radius:5px;padding:5px;margin:4px 0;font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:#302047;color:#d7bdff}
+.day-post.progress{background:#44351c;color:var(--yellow)}
+.day-post.published{background:#123b31;color:var(--green)}
+.legend{display:flex;gap:15px;flex-wrap:wrap;color:var(--muted);font-size:11px;margin:15px 0}
+.form-panel{max-width:600px;margin-top:20px}
+.field{margin:14px 0}
+.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:7px}
+.field input,.field select,.field textarea,.search{width:100%;background:#0d0a17;color:white;border:1px solid var(--border);border-radius:9px;padding:12px;outline:none}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--purple)}
+.field textarea{min-height:90px;resize:vertical}
+.form-actions{display:flex;gap:10px;margin-top:17px}
+.saved-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.saved-item{padding:18px}
+.saved-item p{font-size:13px;line-height:1.6;color:#c7c0d7;white-space:pre-wrap}
+.result{background:#0c0a15;border:1px solid var(--border);border-radius:10px;padding:17px;margin-top:18px;white-space:pre-wrap;line-height:1.7;font-size:14px}
+.pricing{grid-template-columns:repeat(2,minmax(0,1fr))}
+.price-card{padding:25px}
+.price{font-size:36px;font-weight:900;margin:15px 0}
+.price-card li{color:#c3bdd2;font-size:13px;margin:12px 0}
+.hidden{display:none!important}
+.empty-state{color:var(--muted);font-size:13px;padding:18px 0}
+.mobile-menu{display:none}
+.toast{position:fixed;bottom:25px;right:25px;background:#211a36;border:1px solid var(--purple);padding:13px 18px;border-radius:10px;z-index:20;box-shadow:0 10px 35px #0008}
+@media(max-width:1000px){.stats{grid-template-columns:repeat(2,1fr)}.tools-grid{grid-template-columns:repeat(2,1fr)}main{padding:25px}}
+@media(max-width:700px){
+.sidebar{width:220px;transform:translateX(-100%);transition:.2s}
+.sidebar.open{transform:translateX(0)}
+main{margin:0;width:100%;padding:20px 15px 45px}
+.mobile-menu{display:inline-block}
+.topbar{margin-bottom:23px}
+h1{font-size:25px}
+.tools-grid{grid-template-columns:1fr}
+.two-col{grid-template-columns:1fr}
+.day{min-height:75px;padding:5px}
+.day-post{font-size:8px;padding:4px}
+.calendar-grid{gap:3px}
+.weekday{font-size:9px}
+.saved-grid,.pricing{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
-<div class="layout">
-<aside class="side">
-<a class="brand" href="#"><span class="logo">✦</span>CreatorRocket</a>
-<div class="navtitle"><p class="label">Workspace</p><nav class="nav">
-<button class="active" data-page="dashboard"><span>◫</span>Home</button><button data-page="tools"><span>✧</span>Tools</button><button data-page="planner"><span>▦</span>Planner</button><button data-page="saved"><span>☆</span>Saved</button><button data-page="upgrade"><span>↗</span>Pro</button><button data-page="settings"><span>⚙</span>Settings</button>
-</nav></div>
-<div class="side-bottom"><b>Build your creator workflow</b><p>Use the free tools, save ideas and plan your next posts.</p><button class="btn primary" data-go="upgrade">Explore Pro →</button></div>
+<div class="app">
+<aside class="sidebar" id="sidebar">
+  <div class="logo">Creator<span>Rocket</span><small>YOUR CREATOR STUDIO</small></div>
+  <div class="nav-label">WORKSPACE</div>
+  <nav class="nav">
+    <button class="active" data-page="dashboard"><span class="nav-icon">⌂</span>Dashboard</button>
+    <button data-page="tools"><span class="nav-icon">✦</span>Creator tools</button>
+    <button data-page="planner"><span class="nav-icon">▦</span>Content calendar</button>
+    <button data-page="saved"><span class="nav-icon">♡</span>Saved ideas</button>
+  </nav>
+  <div class="nav-label">ACCOUNT</div>
+  <nav class="nav">
+    <button data-page="upgrade"><span class="nav-icon">♛</span>Upgrade</button>
+    <button data-page="settings"><span class="nav-icon">⚙</span>Settings</button>
+  </nav>
+  <div class="sidebar-bottom">
+    <div class="pro-card">
+      <strong>Ready for liftoff?</strong>
+      <p>Explore the future of your creator workspace.</p>
+      <button onclick="showPage('upgrade')">Explore Pro</button>
+    </div>
+  </div>
 </aside>
-<main class="main">
-<header class="top"><div class="mobilebrand"><span class="logo">✦</span>CreatorRocket</div><span class="muted" id="crumb">Workspace / Dashboard</span><div style="display:flex;gap:8px"><button class="btn" data-go="tools">+ Create</button><button class="btn" id="statusBtn">System status</button></div></header>
-<section class="page active" id="page-dashboard">
-<div class="intro"><div><div class="eyebrow">YOUR CREATOR WORKSPACE</div><h1>Make room for your next big idea.</h1><p>Plan your content, turn rough ideas into drafts and build a creative rhythm you can stick to.</p></div><span class="pill" id="date"></span></div>
-<div class="grid stats"><div class="card"><div class="statname">Saved ideas</div><div class="stat" id="savedCount">0</div><p class="note">Your creative library</p></div><div class="card"><div class="statname">Posts planned</div><div class="stat" id="plannedCount">0 / 3</div><p class="note">Keep your next posts moving</p></div><div class="card"><div class="statname">Creator tools</div><div class="stat">12</div><p class="note">AI-assisted creator tools</p></div><div class="card"><div class="statname">Current plan</div><div class="stat">Free</div><p class="note">Billing not connected yet</p></div></div>
-<div class="grid split"><div class="card"><div class="cardhead"><div><h2>This week's content</h2><p>Your simple publishing rhythm</p></div><button class="btn" data-go="planner">Edit plan</button></div><div style="display:flex;justify-content:space-between;font-size:.83rem;margin:12px 0"><b>Planning progress</b><span class="muted" id="progressText">0 of 3</span></div><div class="bar"><span id="progress" style="width:0%"></span></div><div class="week" id="week"></div><p class="note">This is your own plan, not analytics from social platforms.</p></div><div class="card"><div class="cardhead"><div><h2>Quick create</h2><p>Start with one small step</p></div></div><div class="quick"><button data-tool="ideas">✦ Brainstorm video ideas<small>Find angles for your next post</small></button><button data-tool="hooks">ϟ Write a stronger hook<small>Give your opening a purpose</small></button><button data-go="planner">▦ Plan your next posts<small>Give ideas a place to go</small></button></div></div></div>
-<div class="card"><div class="cardhead"><div><h2>Recently saved</h2><p>Pick up where you left off</p></div><button class="btn" data-go="saved">View all</button></div><div id="recent" class="note">Save a generated result and it will show up here.</div></div>
-</section>
-<section class="page" id="page-tools"><div class="intro"><div><div class="eyebrow">THE CREATOR TOOLKIT</div><h1>Make your next post easier.</h1><p>Choose a tool, add context and generate a useful first draft.</p></div></div><input class="field" id="search" placeholder="Search creator tools…" aria-label="Search creator tools"><div class="grid toolgrid" id="toolgrid" style="margin-top:15px"></div><div class="grid formgrid" style="margin-top:18px"><div class="card"><div class="cardhead"><div><h2 id="toolTitle">Video Idea Generator</h2><p>Specific context makes better drafts</p></div><span class="pill">WORKSPACE</span></div><label class="fieldlabel">Tool<select class="field" id="kind"></select></label><label class="fieldlabel">Your niche<input class="field" id="niche" placeholder="e.g. fitness, gaming, books" maxlength="90"></label><label class="fieldlabel">Topic or rough idea<textarea class="field" id="topic" placeholder="What do you want to make content about?" maxlength="1500" rows="4"></textarea></label><label class="fieldlabel">Tone<select class="field" id="tone"><option>Friendly</option><option>Funny</option><option>Bold</option><option>Educational</option><option>Relaxed</option></select></label><button class="btn primary" id="generate" style="width:100%;margin-top:12px">Generate draft ✦</button><p class="note" id="aiHelp">Live AI generation uses your signed-in Supabase account. Review and personalise drafts before publishing.</p></div><div class="card"><div class="cardhead"><div><h2>Your result</h2><p>Review and personalise before publishing</p></div></div><div class="output" id="output">Your draft will appear here.</div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px"><button class="btn" id="copy">Copy</button><button class="btn" id="save">☆ Save idea</button><button class="btn" id="clear">Clear</button></div></div></div></section>
-<section class="page" id="page-planner"><div class="intro"><div><div class="eyebrow">PLAN WITH PURPOSE</div><h1>Your next three posts.</h1><p>Save entries on this device and sync them to your cloud account when signed in.</p></div></div><div class="card"><div class="cardhead"><div><h2>Content plan</h2><p>Start small. Make it achievable.</p></div><span class="pill" id="planBadge">LOCAL SAVE</span></div><div id="planFields"></div><button class="btn primary" id="savePlan" style="margin-top:14px">Save plan</button> <button class="btn" id="exportPlan">Export plan</button><p class="note" id="planStatus">Stored locally on this device.</p></div></section>
-<section class="page" id="page-saved"><div class="intro"><div><div class="eyebrow">YOUR IDEA LIBRARY</div><h1>Keep the good ones.</h1><p>Save results worth revisiting and export a backup whenever you like.</p></div><button class="btn" id="exportIdeas">Export ideas ↓</button></div><div class="card"><div id="savedList"></div></div></section>
-<section class="page" id="page-upgrade"><div class="intro"><div><div class="eyebrow">CREATORROCKET PRO</div><h1>Less blank-page time.</h1><p>Pricing concepts only. Checkout is not live until you configure Stripe.</p></div></div><div class="grid pricing"><div class="card"><span class="pill">START HERE</span><h2>Free</h2><div class="price">£0</div><p class="note">Explore the tools and build a habit.</p><ul><li>12 creator tools</li><li>Three-post planner</li><li>Saved ideas</li><li>Export your work</li></ul><button class="btn" data-go="tools">Use free tools</button></div><div class="card" style="border-color:#7961da"><span class="pill">PROPOSED</span><h2>Pro</h2><div class="price">£9<small class="muted" style="font-size:.85rem"> / month</small></div><p class="note">A price hypothesis—not a market-tested price.</p><ul><li>Potential live AI generation</li><li>Cloud sync across devices</li><li>Reusable brand profiles</li><li>Bulk creation workflows</li></ul><button class="btn primary" data-checkout="pro">Try Pro (setup required)</button></div><div class="card"><span class="pill">FUTURE</span><h2>Studio</h2><div class="price">£19<small class="muted" style="font-size:.85rem"> / month</small></div><p class="note">For creators collaborating with others.</p><ul><li>Potential team workspace</li><li>Shared content calendar</li><li>Approval workflows</li><li>Brand collaboration</li></ul><button class="btn" data-checkout="studio">Explore Studio</button></div></div><div class="card" style="margin-top:15px"><b>Before accepting payments</b><p class="note">Connect Stripe, test checkout and webhooks, enforce paid feature access server-side, and publish terms, privacy and cancellation information. Do not sell features that are not implemented.</p></div></section>
-<section class="page" id="page-settings"><div class="intro"><div><div class="eyebrow">WORKSPACE SETTINGS</div><h1>Know what's connected.</h1><p>Connect your Supabase project to save ideas and plans to your account.</p></div></div>
-<div class="card" style="margin-bottom:15px"><div class="cardhead"><div><h2>Member account</h2><p>Create an account or sign in securely with Supabase.</p></div><span class="pill" id="authState">Not connected</span></div><p class="note">Use your project's public publishable key or legacy anon key only. Never use a secret/service-role key. The key is stored in this browser.</p>
-<label class="fieldlabel">Supabase project URL<input class="field" id="sbUrl" type="url" value="https://jkcozakfmpcfbyybtebd.supabase.co" autocomplete="url"></label><label class="fieldlabel">Supabase publishable key<input class="field" id="sbKey" type="password" placeholder="sb_publishable_…" autocomplete="off"></label><button class="btn primary" id="connectSb">Connect Supabase</button>
-<div id="authPanel" style="display:none;margin-top:14px"><p id="authUser" class="note"></p><label class="fieldlabel">Email<input class="field" id="authEmail" type="email" autocomplete="email" placeholder="you@example.com"></label><label class="fieldlabel">Password<input class="field" id="authPassword" type="password" autocomplete="current-password" minlength="8" placeholder="At least 8 characters"></label><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn primary" id="signUp">Create account</button><button class="btn" id="signIn">Sign in</button><button class="btn" id="signOut" style="display:none">Sign out</button></div><p class="note" id="authMessage" aria-live="polite"></p><button class="btn" id="testCloud" style="margin-top:8px">Test cloud connection</button></div></div>
-<div class="card" id="health"><p class="note">Checking service status…</p></div><div class="card" style="margin-top:15px"><b>Local data</b><p class="note">Export important work before clearing browser data.</p><button class="btn" id="clearLocal">Clear local workspace data</button></div></section>
-<footer class="note" style="border-top:1px solid var(--line);margin-top:26px;padding-top:16px">© <span id="year"></span> CreatorRocket · Creator workspace</footer>
-</main></div><div class="toast" id="toast" role="status" aria-live="polite"></div>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<main>
+  <div class="topbar">
+    <div>
+      <button class="btn secondary mobile-menu" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button>
+      <p id="date-label">YOUR CREATOR WORKSPACE</p>
+    </div>
+    <div class="avatar">CR</div>
+  </div>
+
+  <section class="page active" id="page-dashboard">
+    <h1 id="welcome-title">Welcome back, creator. 🚀</h1>
+    <p class="subtitle">Your ideas are ready for take-off.</p>
+    <div class="grid stats">
+      <div class="stat"><div class="stat-label">CONTENT PLANNED</div><div class="stat-value" id="stat-planned">0</div><div class="stat-note">Posts in your calendar</div></div>
+      <div class="stat"><div class="stat-label">PUBLISHED</div><div class="stat-value" id="stat-published">0</div><div class="stat-note">Content shipped</div></div>
+      <div class="stat"><div class="stat-label">SAVED IDEAS</div><div class="stat-value" id="stat-saved">0</div><div class="stat-note">Ideas in your collection</div></div>
+      <div class="stat"><div class="stat-label">THIS MONTH</div><div class="stat-value" id="stat-month">0</div><div class="stat-note">Posts scheduled this month</div></div>
+    </div>
+    <div class="grid two-col">
+      <div>
+        <div class="panel">
+          <div class="panel-head"><h2>Publishing progress</h2><span id="progress-label">0% complete</span></div>
+          <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+          <p class="muted" style="font-size:12px" id="progress-copy">Add your first post to get started.</p>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><h2>Upcoming content</h2><button class="btn secondary" onclick="showPage('planner')">Open calendar</button></div>
+          <div id="upcoming-list"></div>
+        </div>
+      </div>
+      <div class="panel">
+        <h2>Quick launch</h2>
+        <p class="muted" style="font-size:12px;margin-bottom:17px">Jump straight into creating.</p>
+        <div class="grid quick-grid">
+          <button class="quick" onclick="openTool('hooks')"><span>🎣</span>Hook generator<small>Grab attention</small></button>
+          <button class="quick" onclick="openTool('captions')"><span>✍️</span>Caption writer<small>Write your caption</small></button>
+          <button class="quick" onclick="openTool('ideas')"><span>💡</span>Idea generator<small>Find your next video</small></button>
+          <button class="quick" onclick="showPage('planner')"><span>📅</span>Plan content<small>Organise your week</small></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page" id="page-tools">
+    <h1>Creator tools ✦</h1>
+    <p class="subtitle">A little creative firepower for your next upload.</p>
+    <input class="search" id="tool-search" placeholder="Search creator tools..." oninput="filterTools()">
+    <div class="grid tools-grid" id="tools-grid" style="margin-top:20px"></div>
+  </section>
+
+  <section class="page" id="page-planner">
+    <div class="header-row">
+      <div><h1>Content calendar</h1><p>Build your schedule. Keep your ideas moving.</p></div>
+      <button class="btn primary" onclick="openPostForm()">＋ Add post</button>
+    </div>
+    <div class="panel">
+      <div class="calendar-toolbar">
+        <button class="btn secondary" onclick="changeMonth(-1)">← Previous</button>
+        <h2 id="month-title"></h2>
+        <button class="btn secondary" onclick="changeMonth(1)">Next →</button>
+      </div>
+      <div class="legend"><span>🟣 Planned</span><span>🟡 In progress</span><span>🟢 Published</span></div>
+      <div class="calendar-grid" id="calendar-grid"></div>
+    </div>
+    <div class="panel form-panel hidden" id="post-form">
+      <h2 id="post-form-heading">Add a post</h2>
+      <input type="hidden" id="post-id">
+      <div class="field"><label>POST TITLE</label><input id="post-title" placeholder="e.g. My new editing setup"></div>
+      <div class="field"><label>DATE</label><input id="post-date" type="date"></div>
+      <div class="field"><label>PLATFORM</label><select id="post-platform"><option>TikTok</option><option>YouTube</option><option>Instagram</option><option>Facebook</option><option>Twitch</option><option>Other</option></select></div>
+      <div class="field"><label>STATUS</label><select id="post-status"><option value="planned">Planned</option><option value="progress">In progress</option><option value="published">Published</option></select></div>
+      <div class="field"><label>NOTES</label><textarea id="post-notes" placeholder="Caption ideas, reminders, hashtags..."></textarea></div>
+      <div class="form-actions"><button class="btn primary" onclick="savePost()">Save post</button><button class="btn secondary" onclick="closePostForm()">Cancel</button></div>
+    </div>
+    <div class="panel">
+      <h2>All scheduled posts</h2>
+      <div id="all-posts"></div>
+    </div>
+  </section>
+
+  <section class="page" id="page-saved">
+    <div class="header-row"><div><h1>Saved ideas ♡</h1><p>All the good ideas, in one place.</p></div><button class="btn secondary" onclick="exportIdeas()">Export ideas</button></div>
+    <div class="grid saved-grid" id="saved-grid"></div>
+  </section>
+
+  <section class="page" id="page-upgrade">
+    <h1>Choose your launchpad. 🚀</h1>
+    <p class="subtitle">Start free. Build your creator empire at your own pace.</p>
+    <div class="grid pricing">
+      <div class="panel price-card">
+        <span class="badge">CURRENT EXPERIENCE</span><h2 style="margin-top:18px">Free</h2>
+        <div class="price">£0 <small class="muted">/ forever</small></div>
+        <ul><li>12 built-in creator tools</li><li>Content calendar</li><li>Saved ideas</li><li>Local browser storage</li></ul>
+        <button class="btn secondary" disabled>Included</button>
+      </div>
+      <div class="panel price-card" style="border-color:var(--purple)">
+        <span class="badge">FUTURE PLAN</span><h2 style="margin-top:18px">Creator Pro</h2>
+        <div class="price">£4.99 <small class="muted">/ month*</small></div>
+        <ul><li>Everything in Free</li><li>AI-powered content generation</li><li>Advanced planning features</li><li>Cloud sync</li><li>More creator tools</li></ul>
+        <button class="btn primary" onclick="toast('Pro subscriptions are not connected yet.')">Coming soon</button>
+        <p class="muted" style="font-size:10px">*Proposed price only. No payment is taken.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="page" id="page-settings">
+    <h1>Settings ⚙</h1>
+    <p class="subtitle">Make your workspace yours.</p>
+    <div class="panel form-panel">
+      <h2>Profile</h2>
+      <div class="field"><label>DISPLAY NAME</label><input id="setting-name" placeholder="Creator"></div>
+      <button class="btn primary" onclick="saveSettings()">Save settings</button>
+    </div>
+    <div class="panel form-panel">
+      <h2>Your data</h2>
+      <p class="muted" style="font-size:13px;line-height:1.6">Your calendar and saved ideas are stored in this browser using local storage. Clearing browser data may remove them. Export your ideas to keep a backup.</p>
+      <button class="btn secondary" onclick="exportBackup()">Export full backup</button>
+      <button class="btn danger" style="margin-left:7px" onclick="resetData()">Reset all data</button>
+    </div>
+    <div class="panel form-panel">
+      <h2>About CreatorRocket</h2>
+      <p class="muted" style="font-size:13px;line-height:1.7">CreatorRocket is an independent creator workspace. Built-in generators use templates and prompts in your browser. Live AI services, cloud sync and subscriptions require additional integrations.</p>
+      <span class="badge">VERSION 2.0</span>
+    </div>
+  </section>
+</main>
+</div>
+<div id="toast" class="toast hidden"></div>
+
 <script>
-"use strict";
-const TOOLS=[["ideas","✦","Video Idea Generator","Ideas"],["hooks","ϟ","Hook Writer","Writing"],["captions","✎","Caption Maker","Writing"],["scripts","▤","Short Script Planner","Writing"],["bio","◎","Bio Brainstormer","Profile"],["hashtags","#","Keyword & Tag Ideas","Profile"],["titles","▣","Title & Headline Lab","Writing"],["cta","➜","Call-to-Action Maker","Writing"],["series","∞","Series Builder","Ideas"],["pillars","◈","Content Pillars","Planning"],["repurpose","⤴","Repurpose Planner","Planning"],["checklist","☑","Post-Ready Checklist","Planning"]];
-const $=id=>document.getElementById(id);
-const SB_DEFAULT_URL="https://jkcozakfmpcfbyybtebd.supabase.co";
-const AI_FUNCTION_NAME="creatorrocket-ai";
-let latest="",cloudBusy=false,authListenerAttached=false;
-window.crSupabase=null;window.crSession=null;
-
-function toast(s){const t=$("toast");t.textContent=s;t.style.display="block";clearTimeout(window._toast);window._toast=setTimeout(()=>t.style.display="none",4000)}
-function read(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch{return d}}
-function write(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true}catch{toast("Storage unavailable. Export your work.");return false}}
-function go(p){document.querySelectorAll(".page").forEach(x=>x.classList.toggle("active",x.id==="page-"+p));document.querySelectorAll("[data-page]").forEach(x=>x.classList.toggle("active",x.dataset.page===p));$("crumb").textContent="Workspace / "+({dashboard:"Dashboard",tools:"Creator tools",planner:"Content planner",saved:"Saved ideas",upgrade:"Upgrade plan",settings:"Settings"}[p]||p);history.replaceState(null,"","#"+p);if(p==="saved")renderSaved();if(p==="settings")health();window.scrollTo({top:0,behavior:"smooth"})}
-document.querySelectorAll("[data-page]").forEach(x=>x.onclick=()=>go(x.dataset.page));document.querySelectorAll("[data-go]").forEach(x=>x.onclick=()=>go(x.dataset.go));
-function choose(k){$("kind").value=k;$("toolTitle").textContent=TOOLS.find(t=>t[0]===k)?.[2]||"Creator tool";go("tools");$("topic").focus()}
-const descriptions={ideas:"Find fresh angles for your niche.",hooks:"Write a clearer opening.",captions:"Draft a caption to personalise.",scripts:"Structure a short video.",bio:"Describe your creator profile.",hashtags:"Brainstorm relevant keywords.",titles:"Try clear, compelling titles.",cta:"Invite meaningful engagement.",series:"Build a repeatable format.",pillars:"Choose consistent content themes.",repurpose:"Remix one idea into formats.",checklist:"Review your post before publishing."};
-TOOLS.forEach(t=>{const o=document.createElement("option");o.value=t[0];o.textContent=t[2];$("kind").append(o);const b=document.createElement("button");b.className="tool";b.dataset.search=(t[2]+" "+t[3]).toLowerCase();b.innerHTML="<span style='font-size:1.3rem'>"+t[1]+"</span><b>"+t[2]+"</b><small>"+descriptions[t[0]]+"</small>";b.onclick=()=>choose(t[0]);$("toolgrid").append(b)});
-$("kind").onchange=()=>$("toolTitle").textContent=TOOLS.find(t=>t[0]===$("kind").value)?.[2]||"Creator tool";
-$("search").oninput=()=>{const q=$("search").value.toLowerCase();document.querySelectorAll(".tool").forEach(b=>b.hidden=!b.dataset.search.includes(q))};
-
-function generateTemplate(k,n,t,tone){const hooks=["Here are three things I wish I'd known about "+t+".","I tried "+t+" so you can see what actually happens.","The most surprising part of "+t+" was this.","Let's make "+t+" easier to understand."];const ideas=["A beginner's guide to "+t,"Three common mistakes people make with "+t,"Expectation versus reality: "+t,"I tried "+t+" for a week—here's what I learned","One small tip that makes "+t+" easier","Answer a question beginners ask about "+t];const m={
-ideas:"VIDEO IDEAS · "+n.toUpperCase()+"\n\n"+ideas.map((x,i)=>(i+1)+". "+x).join("\n")+"\n\nChoose the idea that best fits your audience and experience.",
-hooks:"HOOK OPTIONS\n\n"+hooks.map((x,i)=>(i+1)+". "+x).join("\n")+"\n\nRead each out loud and trim unnecessary words.",
-captions:"CAPTION DRAFTS\n\n1. A little progress with "+t+". What would you try next?\n\n2. Saving this for the next time I work on "+t+".\n\n3. Progress, not perfection. What should I explore next?\n\nPersonalise these to match your actual post.",
-scripts:"SHORT VIDEO STRUCTURE\n\nHOOK (0–2s): "+hooks[0]+"\n\nSETUP: Explain what you're trying and why it matters.\n\nMAIN MOMENT: Show the process, tip or result.\n\nPAYOFF: Share what happened and what you learned.\n\nCTA: Ask a genuine question about "+t+".",
-bio:"BIO STARTERS\n\n1. "+n+" creator ✦ sharing the process, not just the highlights\n\n2. Making "+n+" content | Fresh ideas and honest attempts\n\n3. Your corner of the internet for "+n+". Follow along.\n\nOnly use claims that accurately describe you.",
-hashtags:"KEYWORD IDEAS\n\n#"+n.toLowerCase().replace(/[^a-z0-9]/g,"")+" #creatorcommunity #behindthescenes #learnwithme\n\nResearch related phrases:\n• "+n+" tips\n• "+t+" for beginners\n• How to improve at "+t+"\n\nThese are brainstorms, not live trend data.",
-titles:"TITLE IDEAS\n\n1. I Tried "+t+" So You Don't Have To\n2. What I Wish I Knew About "+t+"\n3. 3 Things That Made "+t+" Easier\n4. Can a Beginner Actually Do "+t+"?\n5. My Honest Progress With "+t+"\n\nChoose a title that accurately reflects your content.",
-cta:"CALLS TO ACTION\n\n• What would you try next?\n• Save this for when you need it.\n• Which part should I test next?\n• Have you had the same experience?\n• Follow along for the next attempt.",
-series:"SERIES PLAN: "+t.toUpperCase()+"\n\nEpisode 1: The beginner starting point\nEpisode 2: A common mistake\nEpisode 3: Testing a popular tip\nEpisode 4: One clear challenge\nEpisode 5: What improved and what didn't\nEpisode 6: Answer a viewer question",
-pillars:"CONTENT PILLARS · "+n.toUpperCase()+"\n\n1. TEACH — tips, explainers and lessons\n2. SHOW — process, behind-the-scenes, progress\n3. ENTERTAIN — challenges and relatable moments\n4. CONNECT — opinions and community questions\n5. EXPERIMENT — formats and ideas to test",
-repurpose:"REPURPOSE PLAN · "+t+"\n\nSHORT VIDEO: Share one key takeaway\nSLIDES: Break it into 4–6 steps\nTEXT POST: Explain the lesson behind it\nSTORY: Ask a question about it\nLONG VIDEO: Expand the process and context",
-checklist:"POST-READY CHECKLIST\n\n□ The opening makes the topic clear\n□ The post delivers what the title promises\n□ Captions are readable\n□ Audio is clear\n□ Claims and facts are checked\n□ Music and footage are properly licensed\n□ No private information is visible\n□ Caption and tags fit the post\n□ Preview before publishing"};return m[k]||m.ideas}
-
-async function cloudRead(){
- if(!window.crSupabase)throw new Error("Connect Supabase in Settings first.");
- const {data:sd,error:se}=await window.crSupabase.auth.getSession();if(se)throw se;
- const session=sd.session;if(!session?.user?.id){window.crSession=null;throw new Error("Please sign in first.");}
- window.crSession=session;
- const {data,error}=await window.crSupabase.from("creator_data").select("id,user_id,data").eq("user_id",session.user.id).limit(1).maybeSingle();
- if(error)throw new Error("Database read failed ("+(error.code||"unknown")+"): "+error.message);
- return data;
-}
-async function cloudWrite(){
- if(cloudBusy)throw new Error("A cloud save is already in progress. Try again in a moment.");
- cloudBusy=true;
- try{
-  const existing=await cloudRead(),uid=window.crSession.user.id;
-  const payload={saved:read("cr_saved",[]),plan:read("cr_plan",["","",""]),updatedAt:new Date().toISOString()};
-  let result;
-  if(existing){result=await window.crSupabase.from("creator_data").update({data:payload}).eq("id",existing.id).eq("user_id",uid).select("id");}
-  else{result=await window.crSupabase.from("creator_data").insert({user_id:uid,data:payload}).select("id");}
-  if(result.error)throw new Error("Database save failed ("+(result.error.code||"unknown")+"): "+result.error.message);
-  if(!result.data?.length)throw new Error("No row was saved. Check your INSERT and UPDATE policies.");
-  return true;
- }finally{cloudBusy=false;}
-}
-async function loadCloud(){
- const row=await cloudRead();
- if(!row||!row.data){$("planStatus").textContent="Cloud connected. Your next save will create your cloud record.";return;}
- const p=row.data;
- const localSaved=read("cr_saved",[]),cloudSaved=Array.isArray(p.saved)?p.saved:[];
- const merged=[...cloudSaved];
- for(const item of localSaved){if(!merged.some(x=>x.date===item.date&&x.text===item.text))merged.push(item);}
- write("cr_saved",merged.slice(-200));
- const localPlan=read("cr_plan",["","",""]),cloudPlan=Array.isArray(p.plan)?p.plan:["","",""];
- const hasLocal=localPlan.some(x=>String(x||"").trim());
- write("cr_plan",hasLocal?localPlan:cloudPlan);
- renderSaved();renderPlan();update();
- $("planStatus").textContent="Cloud workspace loaded. Local ideas were preserved.";
-}
-async function syncCloud(showToast=true){
- if(!window.crSession?.user?.id||!window.crSupabase)return false;
- try{await cloudWrite();$("planStatus").textContent="Saved on this device and synced to the cloud.";$("planBadge").textContent="CLOUD SYNC";if(showToast)toast("Saved and synced to the cloud.");return true;}
- catch(e){$("planStatus").textContent="Cloud save failed: "+e.message;if(showToast)toast("Local save kept. Cloud error: "+e.message);console.error("CreatorRocket cloud save:",e);return false;}
-}
-
-/* LIVE AI: calls the deployed Supabase Edge Function with the signed-in session. */
-$("generate").onclick=async()=>{
- const button=$("generate");
- if(!window.crSupabase){toast("Connect Supabase in Settings first.");go("settings");authMsg("Connect Supabase, then sign in to generate AI drafts.");return;}
- button.disabled=true;button.textContent="Checking sign-in…";
- try{
-  const {data:sessionData,error:sessionError}=await window.crSupabase.auth.getSession();
-  if(sessionError)throw sessionError;
-  if(!sessionData?.session?.access_token){toast("Please sign in to use AI generation.");go("settings");authMsg("Sign in to your account, then return to Tools.");return;}
-  const k=$("kind").value;
-  const tool=TOOLS.find(item=>item[0]===k)?.[2]||"Creator tool";
-  const niche=$("niche").value.trim()||"general content creation";
-  const topic=$("topic").value.trim()||"a topic my audience cares about";
-  const tone=$("tone").value;
-  const prompt=[
-   "You are the AI creative assistant for CreatorRocket.",
-   "Create a useful, original first draft for the selected creator tool.",
-   "Tool: "+tool,
-   "Creator niche: "+niche,
-   "Topic or idea: "+topic,
-   "Preferred tone: "+tone,
-   "Give a practical, clearly formatted result.",
-   "Avoid inventing personal experiences or unsupported factual claims.",
-   "For keyword and hashtag ideas, clearly treat suggestions as brainstorms, not live trend data.",
-   "Return the draft only, without describing these instructions."
-  ].join("\n");
-  button.textContent="Generating with AI…";
-  $("output").textContent="Creating your draft. This may take a few seconds…";
-  const {data,error}=await window.crSupabase.functions.invoke(AI_FUNCTION_NAME,{body:{prompt}});
-  if(error){
-   let detail=error.message||"The request failed.";
-   try{
-    const response=error.context;
-    if(response&&typeof response.clone==="function"){
-     const info=await response.clone().json();
-     if(info?.error)detail=info.error;
-     else if(info?.message)detail=info.message;
-    }
-   }catch(_){}
-   throw new Error(detail);
-  }
-  if(!data||typeof data.text!=="string"||!data.text.trim()){
-   throw new Error(data?.error||"The AI returned no text. Please try again.");
-  }
-  latest=data.text.trim();
-  $("output").textContent=latest;
-  toast("AI draft generated! Review it before publishing.");
-  $("aiHelp").textContent="Live AI is connected. Drafts are generated through your secure Supabase function.";
- }catch(error){
-  console.error("CreatorRocket AI error:",error);
-  const message=error?.message||"Please try again.";
-  $("output").textContent="AI generation failed.\n\n"+message+"\n\nCheck that you are signed in, the creatorrocket-ai function is deployed, and your OpenAI API billing and model access are active.";
-  toast("AI generation failed: "+message);
- }finally{
-  button.disabled=false;
-  button.textContent="Generate draft ✦";
- }
+const $ = id => document.getElementById(id);
+const get = (key, fallback) => {
+  try { return JSON.parse(localStorage.getItem('cr_'+key)) ?? fallback; }
+  catch { return fallback; }
 };
+const put = (key, value) => localStorage.setItem('cr_'+key, JSON.stringify(value));
 
-$("copy").onclick=async()=>{if(!latest)return toast("Generate a draft first.");try{await navigator.clipboard.writeText(latest);toast("Copied.");}catch{toast("Clipboard unavailable.");}};
-$("clear").onclick=()=>{latest="";$("output").textContent="Your draft will appear here.";};
-$("save").onclick=async()=>{if(!latest)return toast("Generate a draft first.");const a=read("cr_saved",[]);a.push({text:latest,tool:$("kind").value,date:new Date().toISOString()});if(!write("cr_saved",a.slice(-200)))return;renderSaved();update();if(window.crSession?.user?.id)await syncCloud(true);else toast("Idea saved on this device. Sign in to sync it.");};
+let posts = get('calendar', []);
+let ideas = get('ideas', []);
+let profile = get('profile', {name:'Creator'});
+let currentMonth = new Date();
+let editingTool = null;
 
-function renderSaved(){const host=$("savedList"),a=read("cr_saved",[]);host.replaceChildren();if(!a.length){host.textContent="No saved ideas yet. Generate a draft and save it here.";host.className="note";return;}host.className="";a.slice().reverse().forEach(item=>{const box=document.createElement("article");box.className="saved";const title=document.createElement("b");title.textContent=TOOLS.find(t=>t[0]===item.tool)?.[2]||"Saved idea";const p=document.createElement("p");p.textContent=item.text;const row=document.createElement("div");row.style.cssText="display:flex;gap:8px;flex-wrap:wrap";const cp=document.createElement("button");cp.className="btn";cp.textContent="Copy";cp.onclick=async()=>{try{await navigator.clipboard.writeText(item.text);toast("Copied.");}catch{toast("Clipboard unavailable.");}};const del=document.createElement("button");del.className="btn";del.textContent="Delete";del.onclick=async()=>{const list=read("cr_saved",[]),ix=list.findIndex(x=>x.date===item.date&&x.text===item.text);if(ix>=0)list.splice(ix,1);if(!write("cr_saved",list))return;renderSaved();update();if(window.crSession?.user?.id)await syncCloud(true);else toast("Idea deleted from this device.");};row.append(cp,del);box.append(title,p,row);host.append(box);});}
-function renderPlan(){const host=$("planFields");host.replaceChildren();read("cr_plan",["","",""]).forEach((v,i)=>{const l=document.createElement("label");l.className="fieldlabel";l.textContent="Post "+(i+1);const input=document.createElement("input");input.className="field";input.maxLength=180;input.value=v;input.placeholder=["Quick tip or tutorial","Behind the scenes","Answer a common question"][i];input.dataset.i=i;l.append(input);host.append(l);});}
-$("savePlan").onclick=async()=>{const a=[...$("planFields").querySelectorAll("input")].map(x=>x.value.trim());if(!write("cr_plan",a))return;update();if(window.crSession?.user?.id)await syncCloud(true);else{$("planStatus").textContent="Saved locally. Sign in to sync your plan.";toast("Plan saved on this device.");}};
-function download(name,text){const u=URL.createObjectURL(new Blob([text],{type:"text/plain;charset=utf-8"})),a=document.createElement("a");a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),1000);}
-$("exportPlan").onclick=()=>download("creatorrocket-plan.txt",read("cr_plan",["","",""]).map((x,i)=>(i+1)+". "+(x||"(empty)")).join("\n"));
-$("exportIdeas").onclick=()=>{const a=read("cr_saved",[]);if(!a.length)return toast("No saved ideas to export.");download("creatorrocket-ideas.txt",a.map((x,i)=>"IDEA "+(i+1)+"\n"+x.text).join("\n\n---\n\n"));};
-function update(){const saved=read("cr_saved",[]),plan=read("cr_plan",["","",""]),n=plan.filter(x=>String(x||"").trim()).length;$("savedCount").textContent=saved.length;$("plannedCount").textContent=n+" / 3";$("progressText").textContent=n+" of 3 posts";$("progress").style.width=(n/3*100)+"%";const host=$("recent");host.replaceChildren();if(!saved.length){host.textContent="Your saved ideas will appear here. Generate something you like and save it.";host.className="note";}else{host.className="";saved.slice(-3).reverse().forEach(x=>{const p=document.createElement("p");p.textContent=(TOOLS.find(t=>t[0]===x.tool)?.[2]||"Saved idea")+" — "+x.text.split("\n")[0];host.append(p);});}const w=$("week");w.replaceChildren();const now=new Date(),start=new Date(now);start.setDate(now.getDate()-((now.getDay()+6)%7));["MON","TUE","WED","THU","FRI","SAT","SUN"].forEach((d,i)=>{const date=new Date(start);date.setDate(start.getDate()+i);const el=document.createElement("div");el.className="day"+(date.toDateString()===now.toDateString()?" active":"");const day=document.createElement("span");day.textContent=d;const num=document.createElement("strong");num.textContent=date.getDate();const dot=document.createElement("span");dot.textContent=plan[i%3]?"●":"·";el.append(day,num,dot);w.append(el);});}
-async function health(){const host=$("health");if(!host)return;host.replaceChildren();let aiValue="Sign in to test";if(window.crSupabase&&window.crSession?.user?.id)aiValue="Ready to test";const rows=[["Creator workspace","Ready"],["Local saving","Ready"],["Built-in creator tools","Ready"],["Supabase connection",window.crSupabase?"Connected":"Not connected"],["Cloud database",window.crSession?"Signed in; test or save to verify":"Sign in to test"],["Live AI generation",aiValue],["Stripe billing","Not connected"]];rows.forEach(([name,value])=>{const row=document.createElement("p");row.style.cssText="display:flex;justify-content:space-between;border-bottom:1px solid var(--line);padding:10px 0;gap:12px";const b=document.createElement("b");b.textContent=name;const s=document.createElement("span");s.className="pill";s.textContent=value;row.append(b,s);host.append(row);});const note=document.createElement("p");note.className="note";note.textContent="AI generation uses your signed-in Supabase session. If generation fails, check the Edge Function logs and your OpenAI API billing and model access. Stripe checkout is not configured.";host.append(note);}
-$("statusBtn").onclick=()=>{go("settings");health();};
-$("clearLocal").onclick=()=>{if(confirm("Delete saved ideas and the content plan stored in this browser? This does not delete your cloud copy.")){localStorage.removeItem("cr_saved");localStorage.removeItem("cr_plan");renderSaved();renderPlan();update();toast("Local workspace cleared.");}};
-document.querySelectorAll("[data-checkout]").forEach(b=>b.onclick=()=>toast("Checkout is not active. Configure and test Stripe first."));
+const tools = [
+ {id:'hooks',icon:'🎣',name:'Hook generator',desc:'Create opening lines that grab attention.',label:'Video topic',placeholder:'What is your video about?',kind:'hooks'},
+ {id:'captions',icon:'✍️',name:'Caption writer',desc:'Create captions for your next upload.',label:'Describe your post',placeholder:'What are you posting?',kind:'captions'},
+ {id:'ideas',icon:'💡',name:'Video idea generator',desc:'Find fresh ideas for your niche.',label:'Your niche',placeholder:'Gaming, fitness, music...',kind:'ideas'},
+ {id:'hashtags',icon:'#️⃣',name:'Hashtag helper',desc:'Build a relevant hashtag starter list.',label:'Topic or niche',placeholder:'Enter a topic...',kind:'hashtags'},
+ {id:'titles',icon:'🎬',name:'Title generator',desc:'Find a catchy title for your content.',label:'Video topic',placeholder:'Describe your video...',kind:'titles'},
+ {id:'bio',icon:'👤',name:'Bio builder',desc:'Create a creator profile bio.',label:'Your niche and personality',placeholder:'Tell us about your channel...',kind:'bio'},
+ {id:'scripts',icon:'📝',name:'Script starter',desc:'Build a simple video script outline.',label:'Video topic',placeholder:'What is the video about?',kind:'scripts'},
+ {id:'schedule',icon:'🗓️',name:'Posting planner',desc:'Create a simple weekly posting routine.',label:'Your platform and niche',placeholder:'e.g. TikTok gaming...',kind:'schedule'},
+ {id:'names',icon:'✨',name:'Channel name ideas',desc:'Brainstorm names for your brand.',label:'Your niche or theme',placeholder:'e.g. gaming and comedy...',kind:'names'},
+ {id:'cta',icon:'📣',name:'Call-to-action writer',desc:'Encourage viewers to engage.',label:'Your content topic',placeholder:'What are you sharing?',kind:'cta'},
+ {id:'descriptions',icon:'📄',name:'Description writer',desc:'Draft a video description.',label:'Video details',placeholder:'Describe your video...',kind:'descriptions'},
+ {id:'brainstorm',icon:'🧠',name:'Content brainstorm',desc:'Turn one topic into a content series.',label:'Your starting topic',placeholder:'Enter a topic...',kind:'brainstorm'}
+];
 
-const sbSaved=(()=>{try{return JSON.parse(localStorage.getItem("cr_supabase_public_config")||"{}");}catch{return {};}})();
-$("sbUrl").value=sbSaved.url||SB_DEFAULT_URL;$("sbKey").value=sbSaved.key||"";
-function authMsg(s){$("authMessage").textContent=s;}
-function showAuth(session){window.crSession=session||null;$("authState").textContent=session?"Signed in":"Connected";$("authPanel").style.display="block";$("signOut").style.display=session?"inline-block":"none";$("signIn").style.display=session?"none":"inline-block";$("signUp").style.display=session?"none":"inline-block";$("authUser").textContent=session?"Signed in as "+(session.user?.email||"your account"):"Supabase connected. Sign in or create an account.";if(session){$("planBadge").textContent="CLOUD SYNC";}health();}
-async function connectSupabase(){const url=$("sbUrl").value.trim().replace(/\/+$/,""),key=$("sbKey").value.trim();if(!window.supabase?.createClient){authMsg("Supabase library failed to load. Check your internet connection.");return;}if(!/^https:\/\/[a-z0-9-]+\.supabase\.co$/i.test(url)){authMsg("Enter your Supabase project URL.");return;}if(!key.startsWith("sb_publishable_")&&!key.startsWith("eyJ")){authMsg("Use the public publishable key or legacy anon key, never a secret key.");return;}try{const client=window.supabase.createClient(url,key);const {data,error}=await client.auth.getSession();if(error)throw error;window.crSupabase=client;localStorage.setItem("cr_supabase_public_config",JSON.stringify({url,key}));showAuth(data.session);if(!authListenerAttached){client.auth.onAuthStateChange((event,session)=>{window.crSession=session||null;showAuth(session);if(event==="SIGNED_IN"&&session){setTimeout(async()=>{try{await loadCloud();authMsg("Signed in and cloud workspace loaded.");}catch(e){authMsg("Sign-in worked, but cloud loading failed: "+e.message);$("planStatus").textContent="Cloud load failed: "+e.message;console.error(e);}},0);}},0);authListenerAttached=true;}authMsg("Supabase connected. Sign in to use cloud saving and AI generation.");if(data.session){try{await loadCloud();authMsg("Connected, signed in and cloud workspace loaded.");}catch(e){authMsg("Connected and signed in, but cloud loading failed: "+e.message);$("planStatus").textContent="Cloud load failed: "+e.message;}}}catch(e){window.crSupabase=null;window.crSession=null;$("authState").textContent="Connection failed";authMsg(e.message||"Could not connect. Check the URL and key.");health();}}
-$("connectSb").onclick=connectSupabase;
-$("signUp").onclick=async()=>{if(!window.crSupabase)return authMsg("Connect Supabase first.");const email=$("authEmail").value.trim(),password=$("authPassword").value;if(!email||password.length<8)return authMsg("Enter your email and a password of at least 8 characters.");const {data,error}=await window.crSupabase.auth.signUp({email,password});if(error)return authMsg(error.message);if(data.session){showAuth(data.session);try{await loadCloud();authMsg("Account created and cloud checked.");}catch(e){authMsg("Account created, but cloud loading failed: "+e.message);}}else authMsg("Account created. Check your email confirmation, then sign in.");};
-$("signIn").onclick=async()=>{if(!window.crSupabase)return authMsg("Connect Supabase first.");const {data,error}=await window.crSupabase.auth.signInWithPassword({email:$("authEmail").value.trim(),password:$("authPassword").value});if(error)return authMsg(error.message);showAuth(data.session);try{await loadCloud();authMsg("Signed in. Cloud workspace loaded.");}catch(e){authMsg("Signed in, but cloud loading failed: "+e.message);$("planStatus").textContent="Cloud load failed: "+e.message;console.error(e);}};
-$("signOut").onclick=async()=>{if(!window.crSupabase)return;const {error}=await window.crSupabase.auth.signOut();if(error)return authMsg(error.message);window.crSession=null;showAuth(null);authMsg("Signed out. Local ideas remain on this device.");};
-$("testCloud").onclick=async()=>{if(!window.crSupabase)return authMsg("Connect Supabase first.");try{const row=await cloudRead();authMsg(row?"Cloud connection works. Your database row was found.":"Cloud read works. No row exists yet; save an idea to create one.");$("planStatus").textContent="Cloud read test succeeded.";}catch(e){authMsg("Cloud test failed: "+e.message);$("planStatus").textContent="Cloud test failed: "+e.message;console.error(e);}};
-$("year").textContent=new Date().getFullYear();$("date").textContent=new Date().toLocaleDateString(undefined,{month:"short",day:"numeric",year:"numeric"});renderPlan();renderSaved();update();health();const hash=location.hash.slice(1);if(["dashboard","tools","planner","saved","upgrade","settings"].includes(hash))go(hash);if(sbSaved.url&&sbSaved.key)connectSupabase();
+function showPage(name){
+ document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+ $('page-'+name).classList.add('active');
+ document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===name));
+ $('sidebar').classList.remove('open');
+ if(name==='planner') renderCalendar();
+ if(name==='saved') renderIdeas();
+ if(name==='dashboard') updateDashboard();
+ window.scrollTo(0,0);
+}
+document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.page)));
+
+function toast(message){
+ $('toast').textContent=message;
+ $('toast').classList.remove('hidden');
+ clearTimeout(window.toastTimer);
+ window.toastTimer=setTimeout(()=>$('toast').classList.add('hidden'),2600);
+}
+
+function renderTools(){
+ $('tools-grid').innerHTML=tools.map(t=>`
+ <div class="tool-card" data-search="${t.name.toLowerCase()} ${t.desc.toLowerCase()}">
+ <div class="emoji">${t.icon}</div><h3>${t.name}</h3><p>${t.desc}</p>
+ <button class="btn secondary" onclick="openTool('${t.id}')">Open tool →</button></div>`).join('');
+}
+function filterTools(){
+ const q=$('tool-search').value.toLowerCase();
+ document.querySelectorAll('.tool-card').forEach(c=>c.classList.toggle('hidden',!c.dataset.search.includes(q)));
+}
+function openTool(id){
+ const t=tools.find(x=>x.id===id);
+ if(!t)return;
+ editingTool=t;
+ $('tool-modal')?.remove();
+ const modal=document.createElement('div');
+ modal.id='tool-modal';
+ modal.style='position:fixed;inset:0;background:#000b;z-index:30;display:grid;place-items:center;padding:18px';
+ modal.innerHTML=`
+ <div class="panel" style="width:min(560px,100%);max-height:90vh;overflow:auto">
+ <div class="panel-head"><h2>${t.icon} ${t.name}</h2><button class="btn secondary" onclick="closeTool()">✕</button></div>
+ <p class="muted" style="font-size:13px">${t.desc}</p>
+ <div class="field"><label>${t.label.toUpperCase()}</label><textarea id="tool-input" placeholder="${t.placeholder}"></textarea></div>
+ <button class="btn primary" onclick="generateTool()">Generate ideas</button>
+ <div id="tool-result"></div>
+ </div>`;
+ document.body.appendChild(modal);
+}
+function closeTool(){ $('tool-modal')?.remove(); }
+function generateTool(){
+ const input=$('tool-input').value.trim();
+ if(!input){toast('Add a topic first.');return}
+ const t=editingTool;
+ let result='';
+ const topic=input;
+ const title=topic.charAt(0).toUpperCase()+topic.slice(1);
+ switch(t.kind){
+ case 'hooks': result=[
+ `Stop scrolling if you're interested in ${topic}...`,
+ `I wish I knew this about ${topic} sooner.`,
+ `Here are 3 things nobody tells you about ${topic}.`,
+ `Let's see if I can make ${topic} work.`,
+ `The biggest mistake people make with ${topic}.`,
+ `I tried something different with ${topic}. Here's what happened.`
+ ].join('\n\n');break;
+ case 'captions': result=`${title} ✨\n\nA little look into what I've been working on. What do you think?\n\nLet me know in the comments and follow for more!\n\n#Creator #ContentCreator #${topic.replace(/[^a-z0-9]/gi,'')}`;break;
+ case 'ideas': result=[`A beginner's guide to ${topic}`,`5 things I wish I knew about ${topic}`,`Trying a popular ${topic} trend`,`My honest experience with ${topic}`,`Reacting to common ${topic} opinions`,`A challenge based around ${topic}`,`Behind the scenes of ${topic}`,`Things I would do differently with ${topic}`,`Answering your questions about ${topic}`,`A week of experimenting with ${topic}`].map((x,i)=>(i+1)+'. '+x).join('\n');break;
+ case 'hashtags': result=`#${topic.replace(/[^a-z0-9]/gi,'')} #ContentCreator #CreatorCommunity #NewContent #Explore #ForYou #BehindTheScenes #CreativeProcess`;break;
+ case 'titles': result=[`The Truth About ${title}`,`I Tried ${title}...`,`${title}: What You Need to Know`,`This Changed How I Think About ${title}`,`My Biggest ${title} Mistake`,`The Ultimate ${title} Challenge`].join('\n');break;
+ case 'bio': result=`✨ Creating content about ${topic}\n🎬 New videos and fresh ideas\n💬 Join the community\n👇 Follow along on the journey`;break;
+ case 'scripts': result=`VIDEO: ${title}\n\n1. OPENING HOOK\nIntroduce the topic and give viewers a reason to stay.\n\n2. INTRODUCTION\nExplain what you're going to cover.\n\n3. MAIN SECTION\n• First key point\n• Second key point\n• Example or demonstration\n\n4. WRAP-UP\nSummarise the main takeaway.\n\n5. CALL TO ACTION\nAsk viewers to comment, share or follow.`;break;
+ case 'schedule': result=`SAMPLE WEEKLY SCHEDULE\n\nMonday: Plan and research ${topic}\nTuesday: Record a main video\nWednesday: Edit and prepare captions\nThursday: Publish and engage\nFriday: Create a shorter follow-up\nSaturday: Experiment with a new format\nSunday: Review and plan next week\n\nAdjust this around your own time and energy.`;break;
+ case 'names': result=[`The ${title} Room`,`NextLevel ${title}`,`${title} Central`,`The Daily ${title}`,`Pixel ${title}`,`Beyond ${title}`,`The ${title} Project`,`Simply ${title}`].join('\n');break;
+ case 'cta': result=`Enjoyed this ${topic} post?\n\n💬 Tell me what you think below.\n🔖 Save this so you can come back to it.\n📲 Share it with someone who would enjoy it.\n➕ Follow for more content.`;break;
+ case 'descriptions': result=`In this video, we're exploring ${topic}.\n\nJoin me as I share the process, the highlights and what I learned along the way.\n\nLet me know your thoughts in the comments.\n\nSubscribe or follow for more upcoming content!\n\n#${topic.replace(/[^a-z0-9]/gi,'')} #Creator`;break;
+ case 'brainstorm': result=[`A quick introduction to ${topic}`,`A beginner's perspective on ${topic}`,`Common questions about ${topic}`,`A challenge involving ${topic}`,`A reaction to ${topic}`,`A tutorial about ${topic}`,`A personal story involving ${topic}`,`A comparison of different approaches to ${topic}`,`A series of short tips about ${topic}`,`A community Q&A about ${topic}`].map((x,i)=>(i+1)+'. '+x).join('\n');break;
+ }
+ $('tool-result').innerHTML=`<div class="result" id="generated-result"></div><div class="form-actions"><button class="btn secondary" onclick="copyResult()">Copy result</button><button class="btn primary" onclick="saveGenerated()">Save idea</button></div>`;
+ $('generated-result').textContent=result;
+}
+function copyResult(){
+ navigator.clipboard?.writeText($('generated-result').textContent).then(()=>toast('Copied!')).catch(()=>toast('Select and copy the result.'));
+}
+function saveGenerated(){
+ const text=$('generated-result')?.textContent;
+ if(!text)return;
+ ideas.unshift({id:Date.now(),title:editingTool.name,content:text,created:new Date().toISOString()});
+ put('ideas',ideas);updateDashboard();toast('Idea saved!');
+}
+function renderIdeas(){
+ $('saved-grid').innerHTML=ideas.length?ideas.map(i=>`
+ <div class="panel saved-item"><div class="panel-head"><h3>${escapeHTML(i.title)}</h3><button class="btn danger" onclick="deleteIdea(${i.id})">Delete</button></div>
+ <p>${escapeHTML(i.content)}</p><span class="muted" style="font-size:10px">${new Date(i.created).toLocaleDateString()}</span>
+ </div>`).join(''):'<div class="empty-state">No saved ideas yet. Open a creator tool and save something you like.</div>';
+}
+function deleteIdea(id){ideas=ideas.filter(i=>i.id!==id);put('ideas',ideas);renderIdeas();updateDashboard();toast('Idea deleted.')}
+function escapeHTML(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+
+function openPostForm(date='',post=null){
+ $('post-form').classList.remove('hidden');
+ $('post-form-heading').textContent=post?'Edit post':'Add a post';
+ $('post-id').value=post?post.id:'';
+ $('post-title').value=post?post.title:'';
+ $('post-date').value=post?post.date:(date||localDate(new Date()));
+ $('post-platform').value=post?post.platform:'TikTok';
+ $('post-status').value=post?post.status:'planned';
+ $('post-notes').value=post?post.notes:'';
+ $('post-form').scrollIntoView({behavior:'smooth',block:'center'});
+}
+function closePostForm(){$('post-form').classList.add('hidden')}
+function savePost(){
+ const title=$('post-title').value.trim(),date=$('post-date').value;
+ if(!title||!date){toast('Please add a title and date.');return}
+ const id=$('post-id').value;
+ const item={id:id?Number(id):Date.now(),title,date,platform:$('post-platform').value,status:$('post-status').value,notes:$('post-notes').value.trim()};
+ if(id)posts=posts.map(p=>p.id===Number(id)?item:p);
+ else posts.push(item);
+ put('calendar',posts);closePostForm();renderCalendar();updateDashboard();toast(id?'Post updated!':'Post added to calendar!');
+}
+function editPost(id){const p=posts.find(x=>x.id===id);if(p)openPostForm('',p)}
+function deletePost(id){
+ if(!confirm('Delete this calendar post?'))return;
+ posts=posts.filter(p=>p.id!==id);put('calendar',posts);renderCalendar();updateDashboard();toast('Post deleted.');
+}
+function localDate(d){return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
+function changeMonth(amount){currentMonth.setMonth(currentMonth.getMonth()+amount);renderCalendar()}
+function renderCalendar(){
+ const year=currentMonth.getFullYear(),month=currentMonth.getMonth();
+ $('month-title').textContent=currentMonth.toLocaleDateString('en-GB',{month:'long',year:'numeric'});
+ const first=new Date(year,month,1).getDay();
+ const offset=(first+6)%7;
+ const days=new Date(year,month+1,0).getDate();
+ const today=localDate(new Date());
+ let html=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].map(d=>`<div class="weekday">${d}</div>`).join('');
+ for(let i=0;i<offset;i++)html+='<div class="day empty"></div>';
+ for(let d=1;d<=days;d++){
+  const date=`${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+  const dayPosts=posts.filter(p=>p.date===date);
+  html+=`<div class="day ${date===today?'today':''}"><div class="day-number">${d} <button onclick="openPostForm('${date}')" style="float:right;background:none;border:0;color:var(--blue)">+</button></div>
+  ${dayPosts.map(p=>`<button class="day-post ${p.status}" title="${escapeHTML(p.title)}" onclick="editPost(${p.id})">${escapeHTML(p.platform)} · ${escapeHTML(p.title)}</button>`).join('')}</div>`;
+ }
+ $('calendar-grid').innerHTML=html;
+ const sorted=[...posts].sort((a,b)=>a.date.localeCompare(b.date));
+ $('all-posts').innerHTML=sorted.length?sorted.map(p=>`
+ <div class="list-row"><div><strong>${escapeHTML(p.title)}</strong><div class="muted" style="font-size:11px;margin-top:5px">${new Date(p.date+'T12:00:00').toLocaleDateString('en-GB')} · ${escapeHTML(p.platform)}</div></div>
+ <div style="display:flex;gap:7px;align-items:center"><span class="badge ${p.status}">${p.status==='progress'?'In progress':p.status}</span><button class="btn secondary" onclick="editPost(${p.id})">Edit</button><button class="btn danger" onclick="deletePost(${p.id})">×</button></div></div>`).join(''):'<div class="empty-state">Your calendar is empty. Add your first post above.</div>';
+}
+function updateDashboard(){
+ $('stat-planned').textContent=posts.length;
+ $('stat-published').textContent=posts.filter(p=>p.status==='published').length;
+ $('stat-saved').textContent=ideas.length;
+ const now=new Date();
+ $('stat-month').textContent=posts.filter(p=>p.date.startsWith(`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`)).length;
+ const published=posts.filter(p=>p.status==='published').length;
+ const pct=posts.length?Math.round(published/posts.length*100):0;
+ $('progress-fill').style.width=pct+'%';
+ $('progress-label').textContent=pct+'% complete';
+ $('progress-copy').textContent=posts.length?`${published} of ${posts.length} scheduled posts published.`:'Add your first post to get started.';
+ const upcoming=posts.filter(p=>p.status!=='published').sort((a,b)=>a.date.localeCompare(b.date)).slice(0,5);
+ $('upcoming-list').innerHTML=upcoming.length?upcoming.map(p=>`<div class="list-row"><div><strong>${escapeHTML(p.title)}</strong><div class="muted" style="font-size:11px;margin-top:5px">${new Date(p.date+'T12:00:00').toLocaleDateString('en-GB')} · ${escapeHTML(p.platform)}</div></div><span class="badge ${p.status}">${p.status==='progress'?'In progress':'Planned'}</span></div>`).join(''):'<div class="empty-state">Nothing scheduled yet. Your next big idea could go here.</div>';
+}
+function saveSettings(){
+ profile.name=$('setting-name').value.trim()||'Creator';
+ put('profile',profile);
+ $('welcome-title').textContent=`Welcome back, ${profile.name}. 🚀`;
+ toast('Settings saved!');
+}
+function exportIdeas(){
+ downloadFile('creatorrocket-ideas.txt',ideas.map(i=>`${i.title}\n${i.content}`).join('\n\n--------------------\n\n'),'text/plain');
+}
+function exportBackup(){
+ downloadFile('creatorrocket-backup.json',JSON.stringify({posts,ideas,profile},null,2),'application/json');
+}
+function downloadFile(name,content,type){
+ const blob=new Blob([content],{type});
+ const url=URL.createObjectURL(blob);
+ const a=document.createElement('a');a.href=url;a.download=name;a.click();URL.revokeObjectURL(url);
+}
+function resetData(){
+ if(!confirm('This permanently clears your CreatorRocket calendar, saved ideas and profile from this browser. Continue?'))return;
+ ['calendar','ideas','profile'].forEach(k=>localStorage.removeItem('cr_'+k));
+ posts=[];ideas=[];profile={name:'Creator'};
+ $('setting-name').value='';
+ renderCalendar();renderIdeas();updateDashboard();
+ $('welcome-title').textContent='Welcome back, creator. 🚀';
+ toast('Your local CreatorRocket data has been reset.');
+}
+function init(){
+ $('date-label').textContent=new Date().toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long'}).toUpperCase();
+ $('welcome-title').textContent=`Welcome back, ${profile.name||'creator'}. 🚀`;
+ $('setting-name').value=profile.name||'';
+ renderTools();renderCalendar();renderIdeas();updateDashboard();
+}
+init();
 </script>
 </body>
 </html>
